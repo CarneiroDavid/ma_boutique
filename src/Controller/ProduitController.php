@@ -21,7 +21,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'produit', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProduitRepository $produitRepository): Response
     {
         $produit = new Produit();
