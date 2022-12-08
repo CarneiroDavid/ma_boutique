@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,7 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('stock')
             ->add('img')
-            ->add('contenuPaniers')
+            ->add('Submit', SubmitType::class)
         ;
     }
 

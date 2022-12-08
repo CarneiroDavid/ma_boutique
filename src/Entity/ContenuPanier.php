@@ -24,13 +24,12 @@ class ContenuPanier
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Produit $produit = null;
-
     #[ORM\ManyToOne(inversedBy: 'contenuPaniers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Panier $panier = null;
+
+    #[ORM\ManyToOne(inversedBy: 'contenuPaniers')]
+    private ?Produit $produit = null;
 
     public function getId(): ?int
     {
@@ -61,18 +60,6 @@ class ContenuPanier
         return $this;
     }
 
-    public function getProduit(): ?Produit
-    {
-        return $this->produit;
-    }
-
-    public function setProduit(?Produit $produit): self
-    {
-        $this->produit = $produit;
-
-        return $this;
-    }
-
     public function getPanier(): ?Panier
     {
         return $this->panier;
@@ -81,6 +68,18 @@ class ContenuPanier
     public function setPanier(?Panier $panier): self
     {
         $this->panier = $panier;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }

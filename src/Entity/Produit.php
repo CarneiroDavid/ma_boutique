@@ -37,7 +37,7 @@ class Produit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
 
-    #[ORM\ManyToMany(targetEntity: ContenuPanier::class, mappedBy: 'produit')]
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: ContenuPanier::class)]
     private Collection $contenuPaniers;
 
     public function __construct()
@@ -118,22 +118,25 @@ class Produit
         return $this->contenuPaniers;
     }
 
-    // public function addContenuPanier(ContenuPanier $contenuPanier): self
-    // {
-    //     if (!$this->contenuPaniers->contains($contenuPanier)) {
-    //         $this->contenuPaniers->add($contenuPanier);
-    //         $contenuPanier->addProduit($this);
-    //     }
+    public function addContenuPanier(ContenuPanier $contenuPanier): self
+    {
+        if (!$this->contenuPaniers->contains($contenuPanier)) {
+            $this->contenuPaniers->add($contenuPanier);
+            $contenuPanier->setProduit($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeContenuPanier(ContenuPanier $contenuPanier): self
-    // {
-    //     if ($this->contenuPaniers->removeElement($contenuPanier)) {
-    //         $contenuPanier->removeProduit($this);
-    //     }
+    public function removeContenuPanier(ContenuPanier $contenuPanier): self
+    {
+        if ($this->contenuPaniers->removeElement($contenuPanier)) {
+            // set the owning side to null (unless already changed)
+            if ($contenuPanier->getProduit() === $this) {
+                $contenuPanier->setProduit(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }
