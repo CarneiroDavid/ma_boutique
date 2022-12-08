@@ -1,0 +1,7 @@
+<div class="cat_add_form border border-1 p-2 bg-secondary">
+    <h3>{{ (formtype ?? 'Form' )|trans}}</h3>
+    {{ form(form, {'attr':{'class': class ?? 'default_form' }}) }}
+    {# {{ form_start(form) }}
+        {{ form_error(form)}}
+    {{ form_end(form) }} #}
+</div>

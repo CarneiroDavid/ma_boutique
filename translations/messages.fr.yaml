@@ -1,0 +1,43 @@
+categorie:
+  listTitle: Liste des Catégories
+  create_form: Création d'une catégorie
+  update_form: Mise à jour de la Catégorie "%categorie%"
+  unique_nom: une Categorie ayant le même nom existe déjà 
+  empty : Aucun Catégorie n'a été trouvé
+  labels:
+    id: Id
+    titre: Titre
+    submit: Valider
+  nb : There is %nb% School subject # pour afficher ajouter en argument un tableau associatif trans({'%nb%': 3 })
+article:
+  listTitle: Liste des Articles
+  create_form: Création d'un article
+  update: Mise à jour de l'article "%article%"
+  empty: Aucun articles n'a était trouvé
+  nb: Il y a %nb% Articles
+  labels:
+    titre: Titre
+    auteur: Auteur
+    categorie: Catégorie
+    contenu: Contenu
+    etat: Etat
+    date_parution: Date de parution
+    submit: Envoyer
+
+btn:
+  create_categorie: Créer une Catégorie
+  backtolist: Retourner a la liste des element
+  seeMore: Voir plus
+  save: Sauvegarder
+  edit: Editer
+  update: Mettre à jour
+  delete: Supprimer
+  submit: Valider
+  create: Créer
+nav:
+  panier: Liste des catégories
+  accueil: Liste des articles
+  
+  logout: Déconnexion
+  login: Connexion
+  register: Inscription
