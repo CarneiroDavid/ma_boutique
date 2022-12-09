@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+{{dump(contenuPanier)}}
+<table class="table table-striped">
+    <thead>
+        <th>ID Panier</th>
+        <th>Pseudo</th>
+        <th>Contenu du panier</th>
+        {# <th>Prénom</th>
+        <th>Email</th>
+        <th>Role</th> #}
+    </thead>
+    <tbody>
+        {% for x in contenuPanier %}
+        <tr>
+            <td>{{x.id}}</td>
+            <td>{{x.user.username}}</td>
+            {% for contenu in x.contenuPaniers %}
+            <td>{{contenu}}</td>
+            {% endfor %}
+            {# <td>{{x.prenom}}</td> #}
+            {# <td>{{x.email}}</td> #}
+            {# <td>{{x.roles[0]}}</td> #}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
