@@ -12,18 +12,19 @@ panier:
     submit: Submit
   nb : There is %nb% School subject # pour afficher ajouter en argument un tableau associatif trans({'%nb%': 3 })
 produit:
-  listTitle: List of Articles
-  create_form: Create an Article
+  all: Product's List
+  produit: product
+  form_create: Add Article Form
+  form_update: Update Article Form
   update: Update Article "%article%"
   empty: No Articles found.
   nb: There is %nb% Articles
   labels:
-    titre: Title
-    auteur: Writter
-    categorie: Catégorie
-    contenu: Content
-    etat: State
-    date_parution: Publishing date
+    nom: Name
+    description: Description
+    stock: Quantity
+    prix: Price
+    img: Image (jpg, png)
     submit: Submit
 nav:
   panier: Liste des catégories
@@ -39,5 +40,7 @@ btn:
   edit: Edit
   create: Create
   update: Update
+  add: Add
   delete: Delete
+  addtoCart: Add to Cart
   submit: Submit

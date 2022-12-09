@@ -1,0 +1,35 @@
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-4 col-md-3 border border-1">
+            {% if item.img %}
+                <img src="{{ asset('/uploads/' ~ item.img)}}" class="img-fluid rounded-start" alt="...">
+            {% else %}
+                <img src="{{ asset('/uploads/default.jpg')}}" class="img-fluid rounded-start" alt="">
+            {% endif %}
+        </div>
+        
+        <div class="col-8 col-md-9">
+            <div class="card-body">
+                <h5 class="card-title">{{item.nom}}</h5>
+                <p>{{'produit.labels.description'|trans}} : {{item.description}}</p>
+                <p>{{'produit.labels.stock'|trans}} : {{item.stock}}</p>
+                <p><bold>{{'produit.labels.prix'|trans}} : {{item.prix}}</bold></p>
+
+                <div class="card_cat_links">
+                    {% set test = links ?? []%}
+                    {% if test %}
+                        {% for complement in links %}
+                            {% set class = complement['class'] ?? "btn btn-primary" %}
+                            {% set path = complement['path'] ?? '' %}
+                            {% set id = complement['id'] ?? '' %}
+                            {% set action = complement['action'] ?? 'Voir' %}
+                            <a class="{{class}}" href={{ path(path, {'id':id})}}>{{ action|trans }}</a>
+                        {% else %}
+                            <p></p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

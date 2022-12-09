@@ -5,20 +5,51 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Role\Role;
 
 #[Route('{_locale}/produit')]
 class ProduitController extends AbstractController
 {
-    #[Route('/', name: 'produits', methods: ['GET'])]
-    public function index(ProduitRepository $produitRepository): Response
+    #[Route('/', name: 'produits')]
+    public function index(ProduitRepository $produitRepository, EntityManagerInterface $em, Request $request): Response
     {
+        $produit = new Produit();
+        $formProduit = $this->createForm(ProduitType::class, $produit);
+        $formProduit->handleRequest($request);
+        if($formProduit->isSubmitted() && $formProduit->isValid()){
+            $imgFile = $formProduit->get('img')->getData();
+            if($imgFile){
+                $newFilename = uniqid().'.'.$imgFile->guessExtension();
 
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imgFile->move(
+                        $this->getParameter('produit_img_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                    $this->addFlash('danger',"Impossible d'uploader le fichier");
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $produit->setImg($newFilename);
+            }
+            $em->persist($produit);
+            $em->flush();
+            return $this->redirectToRoute('produits', [], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
+            'formProduit' => $formProduit->createView(),
         ]);
     }
 
@@ -42,10 +73,37 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/{id}', name: 'produit')]
-    public function show(Produit $produit): Response
+    public function show(Produit $produit, EntityManagerInterface $em, Request $request): Response
     {
+        $formProduit = $this->createForm(ProduitType::class, $produit);
+        $formProduit->handleRequest($request);
+        if($formProduit->isSubmitted() && $formProduit->isValid()){
+            $imgFile = $formProduit->get('img')->getData();
+            if($imgFile){
+                $newFilename = uniqid().'.'.$imgFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imgFile->move(
+                        $this->getParameter('produit_img_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                    $this->addFlash('danger',"Impossible d'uploader le fichier");
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $produit->setImg($newFilename);
+            }
+            $em->persist($produit);
+            $em->flush();
+            return $this->redirectToRoute('produit', ['id' => $produit->getId()], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
+            'formProduit' => $formProduit->createView(),
         ]);
     }
 
@@ -67,13 +125,14 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'produit_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'produit_delete')]
     public function delete(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
+        if($this->isGranted('ROLE_ADMIN')){
             $produitRepository->remove($produit, true);
         }
-
+        
+    
         return $this->redirectToRoute('produits', [], Response::HTTP_SEE_OTHER);
     }
 }

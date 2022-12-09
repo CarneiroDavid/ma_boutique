@@ -2,35 +2,36 @@
 
 {% block title %}Produit index{% endblock %}
 
+{% block javascripts %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <script src='{{ asset('produit/produit.js') }}'></script>
+    {% endif %}
+{% endblock %}
 {% block body %}
-    <h1>Produit index</h1>
-
+    <h1>{{ 'produit.all'|trans }}</h1>
+    
+    {% if is_granted('ROLE_ADMIN') %}
+    <div id='produit_showForm' class='btn btn-success'>{{ 'btn.add'|trans}}</div>
+    <div id='form' hidden>
+        {% include 'components/formDefault.html.twig' with { 'form':formProduit,'formtype':'produit.form_create'} %}
+    </div>
+    {% endif %}
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Img</th>
-                <th>actions</th>
-            </tr>
-        </thead>
         <tbody>
         {% for produit in produits %}
             <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.nom }}</td>
-                <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.stock }}</td>
-                <td>{{ produit.img }}</td>
-                <td>
-                    <a href="{{ path('produit', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+                <td colspan="7">
+                {% include 'components/produit/card.html.twig' with { 
+                    'item':produit,
+                    'links':[{
+                        'path':'produit',
+                        'id':produit.id,
+                        'class':'btn btn-primary',
+                        'action': 'btn.seeMore'}],
+                }%}
                 </td>
             </tr>
+
         {% else %}
             <tr>
                 <td colspan="7">no records found</td>
@@ -38,6 +39,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('produit_new') }}">Create new</a>
 {% endblock %}
