@@ -65,5 +65,6 @@ btn:
   submit: Submit
 listPanierUser:
   titre: List of user's cart
+  noPanier: There is no cart
 listUser:
   titre: List of users

@@ -26,6 +26,7 @@ class PanierController extends AbstractController
         ]);
     }
 
+    // Suppression produit du panier
     #[Route('/delete/{id}', name:'delete_produit_panier')]
     public function delete_produit_panier(ContenuPanier $contenuPanier, EntityManagerInterface $em )
     {
@@ -42,6 +43,8 @@ class PanierController extends AbstractController
         $this -> addFlash('success', 'panier.produit.delete');
         return  $this -> redirectToRoute('panier');
     }
+
+    // Ajout produits dans panier
 
     #[Route('/add/{id}', name:'add_produit_panier')]
     public function add_produit_panier(EntityManagerInterface $em, Produit $produit, PanierRepository $pa, ContenuPanierRepository $contenuPanierRepository ) 
@@ -77,6 +80,7 @@ class PanierController extends AbstractController
         return  $this -> redirectToRoute('panier');
     }
 
+    // Validation du panier
     #[Route('/validPanier/{id}', name:'validPanier')]
     public function validPanier(Panier $panier, EntityManagerInterface $em) {
         $panier -> setEtat(1);

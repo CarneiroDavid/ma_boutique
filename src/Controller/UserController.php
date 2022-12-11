@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('{_locale}/user')]
 class UserController extends AbstractController
 {
+    // Affichage commande de l'utilisateur
     #[Route('/', name: 'app_user')]
     public function index(EntityManagerInterface $em, Request $request): Response
     {
@@ -33,6 +34,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    // Affichage info d'une commande de l'utilisateur
     #[Route('/{id}', name:'cmd')]
     public function cmd_card(Panier $panier){
 

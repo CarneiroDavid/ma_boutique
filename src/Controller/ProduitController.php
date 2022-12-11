@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\Role\Role;
 #[Route('{_locale}/produit')]
 class ProduitController extends AbstractController
 {
+    // Affichage des produits
     #[Route('/', name: 'produits')]
     public function index(ProduitRepository $produitRepository, EntityManagerInterface $em, Request $request): Response
     {
@@ -54,6 +55,8 @@ class ProduitController extends AbstractController
             'formProduit' => $formProduit->createView(),
         ]);
     }
+
+    // Affichage des informations du produit
 
     #[Route('/{id}', name: 'produit')]
     public function show(Produit $produit, EntityManagerInterface $em, Request $request): Response
@@ -93,6 +96,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    // Supprssion du produit
     #[Route('/delete/{id}', name: 'produit_delete')]
     public function delete(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {

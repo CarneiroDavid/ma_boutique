@@ -70,5 +70,6 @@ nav:
   register: Inscription
 listPanierUser:
   titre: Liste des paniers des utilisateurs
+  noPanier: Il n'y a pas de panier
 listUser:
   titre: Liste des utilisateurs inscrits

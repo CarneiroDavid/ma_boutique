@@ -1,18 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des paniers des utilisateurs{% endblock %}
+{% block title %}{{'listPanierUser.titre'|trans}}{% endblock %}
 
 {% block body %}
+{% if contenuPanier %}
 <h2 class="text-center mt-4">{{'listPanierUser.titre'|trans}}</h2>
-{# {{dump(contenuPanier)}} #}
 <table class="table table-striped">
     <thead>
         <th>ID Panier</th>
         <th>Pseudo</th>
         <th>Contenu du panier</th>
-        {# <th>Prénom</th>
-        <th>Email</th>
-        <th>Role</th> #}
     </thead>
     <tbody>
         {% for x in contenuPanier %}
@@ -24,11 +21,11 @@
             {{contenu}}
             {% endfor %}
             </td>
-            {# <td>{{x.prenom}}</td> #}
-            {# <td>{{x.email}}</td> #}
-            {# <td>{{x.roles[0]}}</td> #}
         </tr>
         {% endfor %}
     </tbody>
 </table>
+{% else %}
+<p>{{'listPanierUser.noPanier'|trans}}</p>
+{% endif %}
 {% endblock %}
