@@ -35,6 +35,9 @@
                         <a class="nav-link" href="{{ path('panier')}}">{{'nav.panier'|trans}}</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_user')}}">{{'nav.user'|trans}}</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout')}}">{{'nav.logout'|trans}}</a>
                     </li>
                     {% else %}
@@ -52,8 +55,8 @@
                             Admin
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ path('listPanier')}}">Visualiser Panier</a></li>
-                            <li><a class="dropdown-item" href="{{ path('listUser')}}">Utilisateurs inscrit</a></li>
+                            <li><a class="dropdown-item" href="{{ path('listPanier')}}">{{'nav.adminListCart'|trans}}</a></li>
+                            <li><a class="dropdown-item" href="{{ path('listUser')}}">{{'nav.adminUserInscrit'|trans}}</a></li>
                         </ul>
                     </li>
                     {% endif %}

@@ -1,27 +1,25 @@
 panier:
-  listTitle: Liste des Catégories
-  quantite: Quantités
+  listTitle: Panier
+  quantite: Quantitées
   prixUnite: Prix à l'unité
   prixTotalProduit: Prix total du produit
   BoutonSuppr: Supprimer le produit
-  create_form: Création d'une catégorie
-  update_form: Mise à jour de la Catégorie "%categorie%"
-  unique_nom: une Categorie ayant le même nom existe déjà 
-  empty : Aucun Catégorie n'a été trouvé
-  labels:
-    id: Id
-    titre: Titre
-    submit: Valider
-  nb : There is %nb% School subject # pour afficher ajouter en argument un tableau associatif trans({'%nb%': 3 })
+  validPanier: Valider le panier
+  prixTotal: Prix total
+  messagePanierVide: Votre panier est vide
+  dateAchat: Date d'achat
+  update_form: Mise à jour du panier "panier"
+  empty : Aucun panier n'a été trouvé
+
 produit:
   all: Liste des Produits
   produit: produit
-  listTitle: Liste des Articles
+  listTitle: Liste des produits
   form_create: Formulaire d'ajout de produit
   form_update: Formulaire d'Edition d'un produit
-  update: Mise à jour de l'article "%article%"
-  empty: Aucun articles n'a était trouvé
-  nb: Il y a %nb% Articles
+  update: Mise à jour du produit "produit"
+  empty: Aucun produits n'a été trouvé
+  nb: Il y a "nb" produits
   labels:
     nom: Nom
     description: Description
@@ -31,7 +29,6 @@ produit:
     submit: Envoyer
 
 btn:
-  create_categorie: Créer une Catégorie
   backtolist: Retourner a la liste des element
   seeMore: Voir plus
   save: Sauvegarder
@@ -44,8 +41,14 @@ btn:
   addtoCart: Ajouter au Panier
 nav:
   panier: Panier
-  accueil: Liste des articles
-  
+  accueil: Liste des produits
+  user: Profil
+  adminListCart: Liste des paniers utilisateur
+  adminUserInscrit: Liste des utilisateurs inscrits
   logout: Déconnexion
   login: Connexion
   register: Inscription
+listPanierUser:
+  titre: Liste des paniers des utilisateurs
+listUser:
+  titre: Liste des utilisateurs inscrits
