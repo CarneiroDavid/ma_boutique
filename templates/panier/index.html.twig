@@ -15,7 +15,7 @@
         <p>{{'panier.prixUnite'|trans}} : {{contenu.produit.prix}}</p>
         <p>{{'panier.prixTotalProduit'|trans}}: {{contenu.produit.prix * contenu.quantite}}</p>
         {% set prixFinal = prixFinal + contenu.produit.prix * contenu.quantite %}
-        <a href="{{ path('delete_produit_panier', {'id' :contenu.id}) }}">{{'panier.BoutonSuppr'|trans}}</a>
+        <a class="btn btn-danger" href="{{ path('delete_produit_panier', {'id' :contenu.id}) }}">{{'panier.BoutonSuppr'|trans}}</a>
     </div>
 </div>
 {% endfor %}
@@ -24,7 +24,7 @@
 {% if paniers.date != null %}
 <p>{{'panier.dateAchat'|trans}} : {{ paniers.date|date("m/d/Y") }}</p>
 {% else %}
-<a href="{{ path('validPanier', {'id':paniers.id}) }}">{{'panier.validPanier'|trans}}</a>
+<a class="btn btn-success" href="{{ path('validPanier', {'id':paniers.id}) }}">{{'panier.validPanier'|trans}}</a>
 {% endif %}
 
 

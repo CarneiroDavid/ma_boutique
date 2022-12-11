@@ -11,17 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('{_locale}')]
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
-    public function index(): Response
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
     #[Route('/admin/listPanier', name:'listPanier')]
     public function showListPanier(EntityManagerInterface $em)
     {
+        if($this->isGranted("ROLE_SUPER_ADMIN")){
+            return $this->redirectToRoute('produits');
+        }
         $paniers = $em ->getRepository(Panier::class)->findAll();
         // $allPanier = $paniers->getPa();
         
@@ -34,6 +29,9 @@ class AdminController extends AbstractController
     #[Route('/admin/listUser', name:'listUser')]
     public function showListUser(UserRepository $userRepository)
     {
+        if($this->isGranted("ROLE_SUPER_ADMIN")){
+            return $this->redirectToRoute('produits');
+        }
         return $this->render('admin/listUser.html.twig', [
             'allUser' => $userRepository->findBy([], ['id'=> 'DESC']),
         ]);

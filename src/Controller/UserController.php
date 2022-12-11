@@ -24,6 +24,7 @@ class UserController extends AbstractController
         if($formUser->isSubmitted() && $formUser->isValid()){
             $em->persist($user);
             $em->flush();
+            $this->addFlash('success', 'user.update_success');
         }
         return $this->render('user/index.html.twig', [
             'user' => $user,

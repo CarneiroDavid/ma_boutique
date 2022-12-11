@@ -23,52 +23,35 @@ class ProduitController extends AbstractController
         $produit = new Produit();
         $formProduit = $this->createForm(ProduitType::class, $produit);
         $formProduit->handleRequest($request);
-        if($formProduit->isSubmitted() && $formProduit->isValid()){
-            $imgFile = $formProduit->get('img')->getData();
-            if($imgFile){
-                $newFilename = uniqid().'.'.$imgFile->guessExtension();
+        if($this->isGranted('ROLE_ADMIN')){
+            if($formProduit->isSubmitted() && $formProduit->isValid()){
+                $imgFile = $formProduit->get('img')->getData();
+                if($imgFile){
+                    $newFilename = uniqid().'.'.$imgFile->guessExtension();
 
-                // Move the file to the directory where brochures are stored
-                try {
-                    $imgFile->move(
-                        $this->getParameter('produit_img_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                    $this->addFlash('danger',"Impossible d'uploader le fichier");
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $imgFile->move(
+                            $this->getParameter('produit_img_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                        $this->addFlash('danger',"Impossible d'uploader le fichier");
+                    }
+
+                    // updates the 'brochureFilename' property to store the PDF file name
+                    // instead of its contents
+                    $produit->setImg($newFilename);
                 }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-                $produit->setImg($newFilename);
+                $em->persist($produit);
+                $em->flush();
+                return $this->redirectToRoute('produits', [], Response::HTTP_SEE_OTHER);
             }
-            $em->persist($produit);
-            $em->flush();
-            return $this->redirectToRoute('produits', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
             'formProduit' => $formProduit->createView(),
-        ]);
-    }
-
-    #[Route('/new', name: 'produit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProduitRepository $produitRepository): Response
-    {
-        $produit = new Produit();
-        $form = $this->createForm(ProduitType::class, $produit);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $produitRepository->save($produit, true);
-
-            return $this->redirectToRoute('produits', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('produit/new.html.twig', [
-            'produit' => $produit,
-            'form' => $form->createView(),
         ]);
     }
 
@@ -77,51 +60,36 @@ class ProduitController extends AbstractController
     {
         $formProduit = $this->createForm(ProduitType::class, $produit);
         $formProduit->handleRequest($request);
-        if($formProduit->isSubmitted() && $formProduit->isValid()){
-            $imgFile = $formProduit->get('img')->getData();
-            if($imgFile){
-                $newFilename = uniqid().'.'.$imgFile->guessExtension();
+        if($this->isGranted('ROLE_ADMIN')){
+            if($formProduit->isSubmitted() && $formProduit->isValid()){
+                $imgFile = $formProduit->get('img')->getData();
+                if($imgFile){
+                    $newFilename = uniqid().'.'.$imgFile->guessExtension();
 
-                // Move the file to the directory where brochures are stored
-                try {
-                    $imgFile->move(
-                        $this->getParameter('produit_img_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                    $this->addFlash('danger',"Impossible d'uploader le fichier");
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $imgFile->move(
+                            $this->getParameter('produit_img_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                        $this->addFlash('danger',"file.error");
+                    }
+
+                    // updates the 'brochureFilename' property to store the PDF file name
+                    // instead of its contents
+                    $produit->setImg($newFilename);
                 }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-                $produit->setImg($newFilename);
+                $em->persist($produit);
+                $em->flush();
+                $this->addFlash('success','produit.update_success');
+                return $this->redirectToRoute('produit', ['id' => $produit->getId()], Response::HTTP_SEE_OTHER);
             }
-            $em->persist($produit);
-            $em->flush();
-            return $this->redirectToRoute('produit', ['id' => $produit->getId()], Response::HTTP_SEE_OTHER);
         }
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
             'formProduit' => $formProduit->createView(),
-        ]);
-    }
-
-    #[Route('/edit/{id}', name: 'produit_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
-    {
-        $form = $this->createForm(ProduitType::class, $produit);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $produitRepository->save($produit, true);
-
-            return $this->redirectToRoute('produits', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('produit/edit.html.twig', [
-            'produit' => $produit,
-            'form' => $form->createView(),
         ]);
     }
 
@@ -130,6 +98,7 @@ class ProduitController extends AbstractController
     {
         if($this->isGranted('ROLE_ADMIN')){
             $produitRepository->remove($produit, true);
+            $this->addFlash('success', 'produit.delete_success');
         }
         
     

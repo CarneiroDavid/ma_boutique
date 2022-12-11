@@ -5,16 +5,26 @@ panier:
   BoutonSuppr: Delete product
   prixTotalProduit: Total product price
   validPanier: Valid cart
+  prixTotal: Total price
   messagePanierVide: The cart is empty
   dateAchat: Purchase date
   update_form: Update cart "panier"
   empty : No cart found
+  old_panier: Order History
+  produit:
+    add: Product added to Cart
+    delete: Produit deleted from Cart
+    achat: Cart Bought
+
 produit:
   all: Product's List
   produit: product
   form_create: Add Article Form
   form_update: Update Article Form
   update: Update Article "%article%"
+  update_success: Product Updated
+  create_success: Product Added
+  delete_success: Product Deleted
   empty: No product found.
   nb: There is %nb% product
   labels:
@@ -23,6 +33,15 @@ produit:
     stock: Quantity
     prix: Price
     img: Image (jpg, png)
+    submit: Submit
+user:
+  update_success: User Updated
+  create_success: User Registered
+  labels:
+    username: Username
+    nom: Lastname
+    prenom: Firstname
+    email: Email
     submit: Submit
 nav:
   panier: Cart

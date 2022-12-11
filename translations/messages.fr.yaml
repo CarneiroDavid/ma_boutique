@@ -10,7 +10,24 @@ panier:
   dateAchat: Date d'achat
   update_form: Mise à jour du panier "panier"
   empty : Aucun panier n'a été trouvé
-
+  old_panier: Historique des Commandes
+  labels:
+    username: Pseudo
+    nom: Nom
+    prenom: Prenom
+    email: Adresse Mail
+    submit: Envoyer
+  produit:
+    add: Produit ajouté au panier
+    delete: Produit supprimé du panier
+    achat: Achat du Panier
+user:
+  update_success: Utilisateur Mis à Jour
+  create_success: Inscription Réussi
+  labels:
+    nom: Nom
+    prenom: Prénom
+    email: Adresse Email
 produit:
   all: Liste des Produits
   produit: produit
@@ -18,6 +35,9 @@ produit:
   form_create: Formulaire d'ajout de produit
   form_update: Formulaire d'Edition d'un produit
   update: Mise à jour du produit "produit"
+  update_success: Mise à jour du produit réussi
+  create_success: Création du produit réussi
+  delete_success: Suppression du produit réussi
   empty: Aucun produits n'a été trouvé
   nb: Il y a "nb" produits
   labels:
