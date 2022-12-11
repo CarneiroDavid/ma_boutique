@@ -1,5 +1,9 @@
-categorie:
+panier:
   listTitle: Liste des Catégories
+  quantite: Quantités
+  prixUnite: Prix à l'unité
+  prixTotalProduit: Prix total du produit
+  BoutonSuppr: Supprimer le produit
   create_form: Création d'une catégorie
   update_form: Mise à jour de la Catégorie "%categorie%"
   unique_nom: une Categorie ayant le même nom existe déjà 
@@ -39,7 +43,7 @@ btn:
   create: Créer
   addtoCart: Ajouter au Panier
 nav:
-  panier: Liste des catégories
+  panier: Panier
   accueil: Liste des articles
   
   logout: Déconnexion

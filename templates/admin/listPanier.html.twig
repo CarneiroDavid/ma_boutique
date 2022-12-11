@@ -3,7 +3,7 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
-{{dump(contenuPanier)}}
+{# {{dump(contenuPanier)}} #}
 <table class="table table-striped">
     <thead>
         <th>ID Panier</th>
@@ -18,9 +18,11 @@
         <tr>
             <td>{{x.id}}</td>
             <td>{{x.user.username}}</td>
+            <td>
             {% for contenu in x.contenuPaniers %}
-            <td>{{contenu}}</td>
+            {{contenu}}
             {% endfor %}
+            </td>
             {# <td>{{x.prenom}}</td> #}
             {# <td>{{x.email}}</td> #}
             {# <td>{{x.roles[0]}}</td> #}

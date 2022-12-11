@@ -135,4 +135,6 @@ class ProduitController extends AbstractController
     
         return $this->redirectToRoute('produits', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

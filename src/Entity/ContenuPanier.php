@@ -31,6 +31,10 @@ class ContenuPanier
     #[ORM\ManyToOne(inversedBy: 'contenuPaniers')]
     private ?Produit $produit = null;
 
+    public function __construct()
+    {
+        $this -> date = new \DateTime();
+    }
     public function getId(): ?int
     {
         return $this->id;

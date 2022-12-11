@@ -14,7 +14,7 @@
     {% include 'components/produit/card.html.twig' with { 'item':produit}%}
 
     {% if is_granted('ROLE_USER') %}
-        <a class="btn btn-info" href="">{{ 'btn.addtoCart'|trans }}</a>
+        <a class="btn btn-info" href="{{ path('add_produit_panier', {'id': produit.id}) }}">{{ 'btn.addtoCart'|trans }}</a>
     {% endif %}
     <a class='btn btn-secondary' href="{{ path('produits') }}">{{ 'btn.backtolist'|trans({'element':'produit.produit'|trans}) }}</a>
 

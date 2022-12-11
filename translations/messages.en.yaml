@@ -1,5 +1,9 @@
 panier:
-  listTitle: All school subject
+  listTitle: Cart
+  quantite : Quantity
+  prixUnite: Product price
+  BoutonSuppr: Delete product
+  prixTotalProduit: Total product price
   create_form: Create Categorie
   update_form: Update Categorie "%categorie%"
   unique_nom: Catégorie already exist
@@ -27,7 +31,7 @@ produit:
     img: Image (jpg, png)
     submit: Submit
 nav:
-  panier: Liste des catégories
+  panier: Cart
   accueil: Liste des articles
   logout: Logout
   login: Login

@@ -32,6 +32,9 @@
                     </li>
                     {% if is_granted("ROLE_USER")%}
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('panier')}}">{{'nav.panier'|trans}}</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout')}}">{{'nav.logout'|trans}}</a>
                     </li>
                     {% else %}
