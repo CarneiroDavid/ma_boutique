@@ -19,5 +19,5 @@
     <p class="card-text">{{ 'panier.total'|trans }} : {{ prix }} €</p>
   </div>
   
-  <a href="{{ path('panier', {'id' : item.id }) }}" class="btn btn-primary card-footer">{{ 'btn.seeMore'|trans }}</a>
+  <a href="{{ path('cmd', {'id' : item.id }) }}" class="btn btn-primary card-footer">{{ 'btn.seeMore'|trans }}</a>
 </div>

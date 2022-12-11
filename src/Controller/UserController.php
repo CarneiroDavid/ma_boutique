@@ -32,11 +32,11 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name:'panier')]
-    public function test(Panier $panier){
+    #[Route('/{id}', name:'cmd')]
+    public function cmd_card(Panier $panier){
 
-        return $this->render('user/index.html.twig', [
-            'panier' => $panier,
+        return $this->render('panier/index.html.twig', [
+            'paniers' => $panier,
         ]);
 
     }
