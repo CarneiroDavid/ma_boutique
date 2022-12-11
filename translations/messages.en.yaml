@@ -4,25 +4,19 @@ panier:
   prixUnite: Product price
   BoutonSuppr: Delete product
   prixTotalProduit: Total product price
-  create_form: Create Categorie
-  update_form: Update Categorie "%categorie%"
-  unique_nom: Catégorie already exist
-  empty : No Catégories found
-  labels:
-    id: Id
-    titre: Title
-    nom: Name
-    coef: Coef
-    submit: Submit
-  nb : There is %nb% School subject # pour afficher ajouter en argument un tableau associatif trans({'%nb%': 3 })
+  validPanier: Valid cart
+  messagePanierVide: The cart is empty
+  dateAchat: Purchase date
+  update_form: Update cart "panier"
+  empty : No cart found
 produit:
   all: Product's List
   produit: product
   form_create: Add Article Form
   form_update: Update Article Form
   update: Update Article "%article%"
-  empty: No Articles found.
-  nb: There is %nb% Articles
+  empty: No product found.
+  nb: There is %nb% product
   labels:
     nom: Name
     description: Description
@@ -32,12 +26,14 @@ produit:
     submit: Submit
 nav:
   panier: Cart
-  accueil: Liste des articles
+  accueil: Product list
+  user: Profil
+  adminListCart: Cart's list
+  adminUserInscrit: User' list
   logout: Logout
   login: Login
   register: Register
 btn:
-  create_categorie: Create Categorie
   seeMore: see More
   backtolist: go back to element's List
   save: Save
@@ -48,3 +44,7 @@ btn:
   delete: Delete
   addtoCart: Add to Cart
   submit: Submit
+listPanierUser:
+  titre: List of user's cart
+listUser:
+  titre: List of users

@@ -75,4 +75,13 @@ class PanierController extends AbstractController
         $this -> addFlash('success', 'Produit ajouté');
         return  $this -> redirectToRoute('panier');
     }
+
+    #[Route('/validPanier/{id}', name:'validPanier')]
+    public function validPanier(Panier $panier, EntityManagerInterface $em) {
+        $panier -> setEtat(1);
+        $em -> persist($panier);
+        $em -> flush();
+        return  $this -> redirectToRoute('panier');
+
+    }
 }

@@ -3,8 +3,10 @@
 {% block title %}Hello PanierController!{% endblock %}
 
 {% block body %}
+<h2 class="text-center">{{'panier.listTitle'|trans}}</h2>
+
+{% if paniers %}
 {% set prixFinal = 0 %}
-<h2 class"text-center">{{'panier.listTitle'|trans}}</h2>
 {% for contenu in paniers.contenuPaniers %}
 <div class="card">
     <div class="card-body">
@@ -17,5 +19,16 @@
     </div>
 </div>
 {% endfor %}
-<p>Prx total : {{prixFinal}}</p>
+<p>{{'panier.prixTotal'|trans}} : {{prixFinal}}</p>
+
+{% if paniers.date != null %}
+<p>{{'panier.dateAchat'|trans}} : {{ paniers.date|date("m/d/Y") }}</p>
+{% else %}
+<a href="{{ path('validPanier', {'id':paniers.id}) }}">{{'panier.validPanier'|trans}}</a>
+{% endif %}
+
+
+{% else %}
+<p>{{'panier.messagePanierVide'|trans}}</p>
+{% endif %}
 {% endblock %}
