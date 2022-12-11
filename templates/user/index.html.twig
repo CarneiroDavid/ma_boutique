@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <div class="card mb-3">
+  <div class="row g-0">
+    {# <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div> #}
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ user.username }} </h5>
+        <p class="card-text">{{ 'user.labels.nom'|trans }} :  {{ user.nom}}</p>
+        <p class="card-text">{{ 'user.labels.prenom'|trans }} :  {{ user.prenom}}</p>
+        <p class="card-text">{{ 'user.labels.email'|trans }} :  {{ user.email}}</p>
+      </div>
+    </div>
+    <div class="col-md-4" id='form' hidden>
+        {{ form(formUser)}}
+    </div>
+    {% if is_granted('ROLE_ADMIN')%}
+    <div id='produit_showForm' class='btn btn-success'>{{ 'btn.edit'|trans}}</div>
+    {% endif %}
+  </div>
+</div>
+<div>
+    <h3>{{ 'panier.old_panier'|trans }}</h3>
+    {% for cmd in paniers %}
+        {% include 'components/panier/card.html.twig' with {'item':cmd} %}
+        <br>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <script src='{{ asset('produit/produit.js') }}'></script>
+    {% endif %}
+{% endblock %}

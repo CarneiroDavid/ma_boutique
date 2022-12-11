@@ -1,0 +1,23 @@
+<div class="card">
+<div class="card-header"><p class="col-6 m-0 d-inline-block text-start">{{item.id}}</p><p class="col-6 m-0 d-inline-block text-end">{{ item.dateAchat|date('d/m/Y h:m') }}</p></div>
+    
+  <div class="card-body">
+    {% set prix = 0 %}
+    {% set step = 0 %}
+    {% for product in item.contenuPaniers %}
+        {% if step < 3 %}
+            {% set prix = prix + product.produit.prix * product.quantite %}
+            {{ product.produit.nom }}{% if step + 3 < item.contenuPaniers|length  %}{{ ","}}{% endif %}
+        {% endif %}
+        {% set step = step + 1 %}
+    {% endfor %}
+    {% if step > 3 %}
+        ,{{ ' ...' }}
+    {% endif %}
+    
+    
+    <p class="card-text">{{ 'panier.total'|trans }} : {{ prix }} €</p>
+  </div>
+  
+  <a href="{{ path('panier', {'id' : item.id }) }}" class="btn btn-primary card-footer">{{ 'btn.seeMore'|trans }}</a>
+</div>
